@@ -1,65 +1,109 @@
+import unittest # Importing the unittest module
+from password import User
+from password import Credentials
 
-class Logins :
+class TestClass(unittest.TestCase):
     """
-    class that initiates a new intance of login  details 
-      """
-    login_list = [] # empty login details list
-
-    def __init__(self,application,username,password):
+    A Test class that defines test cases for the User class.
+    """
+    def setUp(self):
         """
-        features of the login class
+        Method that runs before each individual test methods run.
         """
-        self.application = application
-        self.username = username
-        self.password = password
+        self.new_user = User('OwitiCharles','XyZ3thf1')
 
-    def save_login(self):
+    def test_init(self):
+        """
+        test case to chek if the object has been initialized correctly
+        """
+        self.assertEqual(self.new_user.username,'OwitiCharles')
+        self.assertEqual(self.new_user.password,'XyZ3thf1')
 
+    def test_save_user(self):
+        """
+        test case to test if a new user instance has been saved into the User list
+        """
+        self.new_user.save_user()
+        self.assertEqual(len(User.user_list),1)
+
+class TestCredentials(unittest.TestCase):
+    """
+    A test class that defines test cases for credentials class
+    """ 
+    def setUp(self):
+        """
+        Method that runs before each individual credentials test methods run.
+        """
+        self.new_credential = Credentials('Gmail','Owiti_Charles','yx5Gij43')
+    def test_init(self):
+        """
+        Test case to check if a new Credentials instance has been initialized correctly
+        """
+        self.assertEqual(self.new_credential.account,'Gmail')
+        self.assertEqual(self.new_credential.userName,'Owiti_Charles')
+        self.assertEqual(self.new_credential.password,'yx5Gij43')
+
+    def save_credential_test(self):
+        """
+        test case to test if the crential object is saved into the credentials list.
+        """
+        self.new_credential.save_details()
+        self.assertEqual(len(Credentials.credentials_list),1)
+
+    def tearDown(self):
         '''
-        save_login method saves users login details objects into login_list
+        method that does clean up after each test case has run.
+        '''
+        Credentials.credentials_list = []
+
+    def test_save_many_accounts(self):
+        '''
+        test to check if we can save multiple credentials objects to our credentials list
+        '''
+        self.new_credential.save_details()
+        test_credential = Credentials("Twitter","mikeycharles","Mfh45hfk") 
+        test_credential.save_details()
+        self.assertEqual(len(Credentials.credentials_list),2)
+
+    def test_delete_credential(self):
+        """
+        test method to test if we can remove an account credentials from our credentials_list
+        """
+        self.new_credential.save_details()
+        test_credential = Credentials("Twitter","mikeycharles","Mfh45hfk")
+        test_credential.save_details()
+
+        self.new_credential.delete_credentials()
+        self.assertEqual(len(Credentials.credentials_list),1)
+
+    def test_find_credentialr(self):
+        """
+        test to check if we can find a credential entry by account name and display the details of the credential
+        """
+        self.new_credential.save_details()
+        test_credential = Credentials("Twitter","mikeycharles","Mfh45hfk") 
+        test_credential.save_details()
+
+        the_credential = Credentials.find_credential("Twitter")
+
+        self.assertEqual(the_credential.account,test_credential.account)
+
+    def test_credential_exist(self):
+        """
+        test to check if we can return a true or false based on whether we find or can't find the credential.
+        """
+        self.new_credential.save_details()
+        the_credential = Credentials("Twitter", "mikeycharles", "Mfh45hfk")  
+        the_credential.save_details()
+        credential_is_found = Credentials.if_credential_exist("Twitter")
+        self.assertTrue(credential_is_found)
+
+    def test_display_all_saved_credentials(self):
+        '''
+        method that displays all the credentials that has been saved by the user
         '''
 
-        Logins.login_list.append(self)
+        self.assertEqual(Credentials.display_credentials(),Credentials.credentials_list)
 
-    def delete_login(self):
-
-        '''
-        save_login method deletes users login details objects from login_list
-        '''
-
-        Logins.login_list.remove(self)
-
-    @classmethod
-    def find_by_app(cls,application):
-        '''
-        Method that takes in a string and returns login details that matches that application.
-
-        Args:
-            number: Phone number to search for
-        Returns :
-            Contact of person that matches the number.
-        '''
-
-        for login in cls.login_list:
-            if login.application == string:
-                return login
-    @classmethod
-    def login_exist(cls,application):
-        '''
-        Method that checks if login details exists from the login list.
-        Args:
-            number: Application to search if the login details exists
-        Returns :
-            Boolean: True or false depending if the logins exists
-        '''
-        for login in cls.login_list:
-            if login.application == string:
-                    return True
-
-        return False
-    @classmethod
-    def display_logins(cls):
-        '''
-        method that returns the login list
-        '''
-        return cls.login_list
+if __name__ == "__main__":
+    unittest.main()
