@@ -28,7 +28,7 @@ class User:
 
     def delete_user(self):
         '''
-        delete_account method deletes a  saved account from the list
+        method deletes a  saved account from the list
         '''
         User.user_list.remove(self)
 
@@ -40,7 +40,7 @@ class Credentials():
     @classmethod
     def verify_user(cls,username, password):
         """
-        method to verify whether the user is in our user_list or not
+        method to verify whether the user is in our user_list
         """
         a_user = ""
         for user in User.user_list:
@@ -64,7 +64,7 @@ class Credentials():
 
     def delete_credentials(self):
         """
-        delete_credentials method that deletes an account credentials from the credentials_list
+        method that deletes an account credentials from the credentials_list
         """
         Credentials.credentials_list.remove(self)
     

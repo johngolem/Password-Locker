@@ -105,7 +105,7 @@ def passlocker():
         password = input("password: ")
         login = login_user(username,password)
         if login_user == login:
-            print(f"Hello {username}.Welcome To PassWord Locker Manager")  
+            print(f"Hello {username}.Welcome To PassWord Locker")  
             print('\n')
     while True:
         print("Use these short codes:\n CC - Create a new credential \n DC - Display Credentials \n FC - Find a credential \n GP - Generate A randomn password \n D - Delete credential \n EX - Exit the application \n")
