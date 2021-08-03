@@ -2,15 +2,6 @@
 #!/usr/bin/env python3.6
 from password import User, Credentials
 
-def function():
-	print("               ____                         _____  _                               ")
-	print("              |  _ \                       / ____|| |                              ")
-	print("              | |_) )  ____  ___   ___    / ____  | |__    _____  _ _  ____        ")
-	print("              |  __/  / _  |/ __  / __    \___  \ |  __)  /  _  \| '_|/ __ \       ")
-	print("              | |    / (_| |\__ \ \__ \    ___  / | |___ (  (_)  ) | |  ___/       ")
-	print("              |_|    \_____| ___/  ___/   |____/  |_____) \_____/|_|  \____        ")
-function()
-
 def create_new_user(username,password):
     '''
     Function to create a new user with a username and password
@@ -85,7 +76,7 @@ def copy_password(account):
 
 
 def passlocker():
-    print("Hello Welcome to your Accounts Password Store...\n Please enter one of the following to proceed.\n CA ---  Create New Account  \n LI ---  Have An Account  \n")
+    print("Hello Welcome to your Accounts Password Locker...\n To proceed, type one of the following commands.\n CA ---  Create New Account  \n LI ---  Have An Account  \n")
     short_code=input("").lower().strip()
     if short_code == "ca":
         print("Sign Up")
